@@ -1,27 +1,33 @@
 import random
 
-words_list= ['canada','grape', 'doctor','bingo','create','could']
-word=random.choice(words_list)
+wordsList= ['canada','grape', 'doctor','bingo','create','could']
 
-answer = ['-' for _ in word]
-print('_ '*len(word))
-print(f"this word is {len(word)} letters")
-
-    #game loop
-while True:
-    guess = input('Enter word to guess: ')
-
-    while len(guess)!= len(word):
-        print("Guess must be the same length as the word")
-        guess = input('Enter another guess: ')
-
-    for i in range(len(answer)):
-        if(guess[i]==word[i]):
-            answer[i]=guess[i]
+class WordleGame:
+    def __init__(self):
+        self.word= random.choice(wordsList)
+        self.wordLength=len(self.word)
+        self.maxAttempts=10
+        self.attempts=0
+        self.isOver = False
+        self.isWon = False
+    
+    #Check if the letter is in the correct spot it is green, wrong spot correct letter yellow and wrong eveyrthing grey
+    def checkGuess(self, guess):
+        result=[]
+        for i in range(self.wordLength):
+            if guess[i]==self.word[i]:
+                result.append((guess[i],'green'))
+            elif guess[i] in self.word:
+                result.append((guess[i],'yellow'))
+            else:
+                result.append((guess[i], 'gray'))
+       
+        self.attempts+=1
         
-    solution = "".join(answer)
-    print(solution)
+        if guess==self.word:
+            self.isWon = True
+            self.isOver = True
+        elif self.attempts >= self.maxAttempts:
+            self.isOver = True
 
-    if solution==word:
-        print("You guessed the word!")
-        break
+        return result
