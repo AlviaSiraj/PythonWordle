@@ -15,15 +15,17 @@ currentRow=0
 def submitGuess():
     global currentRow
 
+    # clear the message label
+    messageLabel.config(text="")
     guess=entry.get().lower()
     entry.delete(0,tk.END)
 
     if(len(guess)!= game.wordLength):
-        messageLabel.config(f"word must be {game.wordLength} letters long")
+        messageLabel.config(text=f"word must be {game.wordLength} letters long")
         return
     
     results = game.checkGuess(guess)  # [(letter, color), ...]
-    attemptsMessage.config(text=game.attempts)
+    attemptsMessage.config(text=f"attempts: {game.attempts}")
 
     # Display letter boxes with correct colors
     for i, (letter,color) in enumerate(results):
@@ -39,20 +41,20 @@ def submitGuess():
         entry.config(state="disabled")
         submitButton.config(state="disabled")
     else:
-        current_row += 1
+        currentRow += 1
 
 # framework = ttk.Frame(root,padding=30)
 # framework.grid()
 #input fields
-message = tk.Label(root, text="Enter word to guess",  font=("Helvetica", 12))
+message = ttk.Label(root, text="Enter word to guess",  font=("Helvetica", 12))
 message.grid(row=9,column=0, columnspan=game.wordLength)
-entry = tk.Entry(root,font=("Helvetica", 16))
+entry = ttk.Entry(root,font=("Helvetica", 16))
 entry.grid(row=10,column=0, columnspan=game.wordLength, pady=10)
 #Submit button
-submitButton = tk.Button(root, text="Submit guess", command=submitGuess)
+submitButton = ttk.Button(root, text="Submit guess", command=submitGuess)
 submitButton.grid(row=11,column=0, columnspan=game.wordLength)
 #message label for win/lose
-messageLabel = tk.Label(root, text="",  font=("Helvetica", 12))
+messageLabel = ttk.Label(root, text="",  font=("Helvetica", 12))
 messageLabel.grid(row=12, column=0, columnspan=game.wordLength, pady=10)
 
 attemptsMessage = tk.Label(root, text="",  font=("Helvetica", 12))
