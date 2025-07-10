@@ -16,11 +16,11 @@ class WordleGame:
         result=[]
         for i in range(self.wordLength):
             if guess[i]==self.word[i]:
-                result.append((guess[i],'green'))
+                result.append((guess[i],'#6aaa64'))
             elif guess[i] in self.word:
-                result.append((guess[i],'yellow'))
+                result.append((guess[i],'#c9b458'))
             else:
-                result.append((guess[i], 'gray'))
+                result.append((guess[i], '#787c7e'))
        
         self.attempts+=1
         

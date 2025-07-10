@@ -7,7 +7,11 @@ game= WordleGame()
 
 #initialize window
 root=tk.Tk()
-root.title="Wordle Game"
+root.geometry("600x400")
+root.configure(bg="#FCDEEC")
+
+root.title("Wordle Game")
+root.iconbitmap("wordleIcon.ico")
 
 #track rows
 currentRow=0
@@ -29,7 +33,7 @@ def submitGuess():
 
     # Display letter boxes with correct colors
     for i, (letter,color) in enumerate(results):
-        label = tk.Label(root, text=letter.upper(), width=4, height=2, font=("Helvetica", 16), bg=color, relief="solid")
+        label = tk.Label(centerFrame, text=letter.upper(), width=4, height=2, font=("Consolas", 20, "bold"), bg=color, relief="ridge")
         label.grid(row=currentRow, column=i, padx=2, pady=2)
 
     if game.isWon:
@@ -43,23 +47,26 @@ def submitGuess():
     else:
         currentRow += 1
 
-# framework = ttk.Frame(root,padding=30)
+centerFrame = tk.Frame(root, bg="#FCDEEC")  # Light blue-ish background
+centerFrame.config()
+centerFrame.pack(expand=True) #Center a frame in the window
 # framework.grid()
 #input fields
-message = ttk.Label(root, text="Enter word to guess",  font=("Helvetica", 12))
-message.grid(row=9,column=0, columnspan=game.wordLength)
-entry = ttk.Entry(root,font=("Helvetica", 16))
-entry.grid(row=10,column=0, columnspan=game.wordLength, pady=10)
+tk.Label(centerFrame, text=f"The word is {game.wordLength} Letters Long",bg="#FCDEEC").grid(row=11, column=0, columnspan=game.wordLength)
+message = tk.Label(centerFrame, text=f"Enter word to guess",bg='#FCDEEC',  font=("Calibri", 12))
+message.grid(row=12,column=0, columnspan=game.wordLength)
+#entry
+entry = tk.Entry(centerFrame,font=("Helvetica", 16))
+entry.grid(row=13,column=0, columnspan=game.wordLength, pady=10)
 #Submit button
-submitButton = ttk.Button(root, text="Submit guess", command=submitGuess)
-submitButton.grid(row=11,column=0, columnspan=game.wordLength)
+submitButton = tk.Button(centerFrame, text="Submit guess", command=submitGuess)
+submitButton.grid(row=14,column=0, columnspan=game.wordLength)
 #message label for win/lose
-messageLabel = ttk.Label(root, text="",  font=("Helvetica", 12))
-messageLabel.grid(row=12, column=0, columnspan=game.wordLength, pady=10)
+messageLabel = tk.Label(centerFrame, text="",  font=("Helvetica", 12),bg='#FCDEEC')
+messageLabel.grid(row=15, column=0, columnspan=game.wordLength, pady=10)
 
-attemptsMessage = tk.Label(root, text="",  font=("Helvetica", 12))
-attemptsMessage.grid(row=12, column=5, columnspan=game.wordLength, pady=10)
+attemptsMessage = tk.Label(centerFrame, text="",  font=("Helvetica", 12),bg='#FCDEEC')
+attemptsMessage.grid(row=15, column=5, columnspan=game.wordLength, pady=10)
 
 #start GUI
 root.mainloop()
-
