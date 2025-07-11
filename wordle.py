@@ -6,7 +6,7 @@ wordsList= [ 'apple', 'brave', 'candy', 'dance', 'eagle',
     'pearl', 'bring', 'radio', 'snail', 'tiger',
     'umbra', 'viola', 'wharf', 'freeze', 'yacht',
     'zebra', 'crisp', 'dozen', 'elbow', 'frost',
-    'banana', 'camera', 'dragon', 'eclipse', 'flower',
+    'banana', 'camera', 'dragon', 'bingo', 'flower',
     'garden', 'hammer', 'island', 'jungle', 'kettle',
     'ladder', 'marble', 'crazy', 'orange', 'puzzle',
     'rabbit', 'silver', 'ticket', 'curly', 'window']
