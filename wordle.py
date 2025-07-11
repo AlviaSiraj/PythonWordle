@@ -1,6 +1,15 @@
 import random
 
-wordsList= ['canada','grape', 'doctor','bingo','create','could']
+wordsList= [ 'apple', 'brave', 'candy', 'dance', 'eagle',
+    'flame', 'grape', 'honey', 'action', 'juice',
+     'koala', 'lemon', 'mango', 'novel', 'ocean',
+    'pearl', 'bring', 'radio', 'snail', 'tiger',
+    'umbra', 'viola', 'wharf', 'freeze', 'yacht',
+    'zebra', 'crisp', 'dozen', 'elbow', 'frost',
+    'banana', 'camera', 'dragon', 'eclipse', 'flower',
+    'garden', 'hammer', 'island', 'jungle', 'kettle',
+    'ladder', 'marble', 'crazy', 'orange', 'puzzle',
+    'rabbit', 'silver', 'ticket', 'curly', 'window']
 
 class WordleGame:
     def __init__(self):
@@ -16,11 +25,11 @@ class WordleGame:
         result=[]
         for i in range(self.wordLength):
             if guess[i]==self.word[i]:
-                result.append((guess[i],'#6aaa64'))
+                result.append((guess[i],'#7EBF7A'))
             elif guess[i] in self.word:
-                result.append((guess[i],'#c9b458'))
+                result.append((guess[i],'#E8C97E'))
             else:
-                result.append((guess[i], '#787c7e'))
+                result.append((guess[i], "#F7DCDA"))
        
         self.attempts+=1
         
