@@ -1,38 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Wordle Game - Python + Tkinter</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fffaf9;
-      color: #333;
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-      line-height: 1.6;
-    }
-    h1, h2 {
-      color: #D39D96;
-    }
-    pre {
-      background-color: #f4f4f4;
-      padding: 10px;
-      overflow-x: auto;
-    }
-    code {
-      background-color: #f1f1f1;
-      padding: 2px 4px;
-      border-radius: 4px;
-      font-family: Consolas, monospace;
-    }
-    ul {
-      list-style-type: square;
-    }
-  </style>
-</head>
 <body>
 
   <h1>🟩 Wordle Game (Python + Tkinter GUI)</h1>
