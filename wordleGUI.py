@@ -3,7 +3,16 @@ import customtkinter as ctk
 from tkinter import ttk #modern themed widget set and API
 from wordle import WordleGame
 import enchant
+import sys
+import os
 
+# --- PACKAGING APP ---
+def resource_path(relative_path):
+    try:
+        return os.path.join(sys._MEIPASS, relative_path)
+    except AttributeError:
+        return os.path.join(os.path.abspath("."), relative_path)
+    
 # Create dictionary object (English)
 d = enchant.Dict("en_US")  # or "en_GB" for British English
 
@@ -17,7 +26,7 @@ game= WordleGame()
 root=ctk.CTk()
 root.geometry("600x650")
 root.title("Wordle Game")
-root.iconbitmap("wordleIcon.ico")
+root.iconbitmap(resource_path("wordleIcon.ico"))
  
 # ---- INITIALIZE FRAMES ----
 mainFrame = ctk.CTkFrame(root, fg_color="#FFEDEE")  # ✅ use `fg_color` not `bg_color`
@@ -35,6 +44,39 @@ ctk.CTkLabel(guessFrame,text="WORDLE GAME", font=("Consolas", 28, "bold"), fg_co
 #track rows
 currentRow=1
 
+# REPLAY GAME
+def replayGame():
+    global currentRow, game
+    #reset game state
+    game=WordleGame()
+    currentRow=1
+
+      # Clear all guess labels
+    for child in guessFrame.winfo_children():
+        if isinstance(child, ctk.CTkLabel) and child.cget("text") != "WORDLE GAME":
+            child.configure(text="", fg_color='#F7DCDA')
+
+      # Recreate empty boxes for all rows
+    for i in range(10):  # 10 rows
+        for j in range(game.wordLength):
+            label = ctk.CTkLabel(guessFrame, text="", width=40, height=40, 
+                               font=("Helvetica", 16), fg_color='#F7DCDA', 
+                               corner_radius=6)
+            label.grid(row=currentRow+i, column=j, padx=2, pady=2)
+
+      # Clear message label
+    messageLabel.configure(text="")
+    
+    # Re-enable input controls
+    entry.configure(state="normal")
+    submitButton.configure(state="normal")
+    
+    # Remove the "Play Again" button if it exists
+    for child in topFrame.winfo_children():
+        if isinstance(child, ctk.CTkButton) and child.cget("text") == "Play Again":
+            child.destroy()
+
+    
 # show row of empty boxes
 for i in range(10):  # 10 rows
     for j in range(game.wordLength):
@@ -69,10 +111,15 @@ def submitGuess():
         messageLabel.configure(text="🎉 You guessed the word!", font=("Helvetica", 20))
         entry.configure(state="disabled")
         submitButton.configure(state="disabled")
+        retry = ctk.CTkButton(topFrame, text="Play Again", font=("Consolas", 14, "bold"), command=replayGame,text_color="#F7F3F6", fg_color="#D39D96", hover_color="#755B64", )
+        retry.pack()
     elif game.isOver:
         messageLabel.configure(text=f"Game Over! The word was: {game.word.upper()}",font=("Helvetica", 20))
         entry.configure(state="disabled")
         submitButton.configure(state="disabled")
+        # ---- TRY AGAIN BUTTON ----
+        retry = ctk.CTkButton(topFrame, text="Play Again", font=("Consolas", 14, "bold"), command=replayGame,text_color="#F7F3F6", fg_color="#D39D96", hover_color="#755B64", )
+        retry.pack()
     else:
         currentRow += 1
 
