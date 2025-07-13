@@ -30,6 +30,9 @@
     <li><code>pyenchant</code></li>
   </ul>
 
+<p>clone repository</p>
+  <pre><code>git clone https://github.com/AlviaSiraj/PythonWordle.git</code></pre>
+
   <p>Install required packages:</p>
   <pre><code>pip install customtkinter pyenchant</code></pre>
 
